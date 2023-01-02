@@ -1,0 +1,16 @@
+#nonk8s
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: testing-nestjs-oidc-protect
+  description: A NestJS OidcProtect plugin for the @jbiskur/nestjs-test-utilities testing library. To facilitate mocking successfull calls to protected routes during testing.
+  annotations:
+    github.com/project-slug: flowcore-io/library-testing-nestjs-oidc-protect-ts
+  links:
+    - url: https://www.npmjs.com/package/@flowcore/testing-nestjs-oidc-protect
+      title: Library NPM Link
+spec:
+  type: library
+  owner: backend
+  system: system:auth-libraries
+  lifecycle: experimental
