@@ -1,1 +1,1 @@
-export * from "./example/example.module";
+export * from "./plugin/oidc-protect-module.plugin";

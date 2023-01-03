@@ -2,27 +2,46 @@
 
 # Testing Nestjs-oidc-protect
 
-A NestJS OidcProtect plugin for the @jbiskur/nestjs-test-utilities testing library. To facilitate mocking successfull calls to protected routes during testing.
+A NestJS OidcProtect plugin for
+the [@jbiskur/nestjs-test-utilities](https://www.npmjs.com/package/@jbiskur/nestjs-test-utilities) testing library. To
+facilitate mocking
+successfull
+calls to protected routes during testing.
 
 ## Installation
 
 install with npm:
 
 ```bash
-npm install @flowcore/testing-nestjs-oidc-protect
+npm install @flowcore/testing-nestjs-oidc-protect @flowcore/nestjs-oidc-protect
 ```
 
 or yarn:
 
 ```bash
-yarn add @flowcore/testing-nestjs-oidc-protect
+yarn add @flowcore/testing-nestjs-oidc-protect @flowcore/nestjs-oidc-protect
 ```
 
 ## Usage
 
-## Development
+To use the library with the `@jbiskur/nestjs-test-utilities` testing library, you need to invoke it using `with`:
 
-```bash
+```typescript
+import {OidcProtectModulePlugin} from '@flowcore/testing-nestjs-oidc-protect';
+
+app = await new NestApplicationBuilder()
+  .withTestModule((testModule) => testModule.withModule(TestModule))
+  // ... other plugins
+  .with(OidcProtectModulePlugin)
+  // ... other plugins
+  .build();
+```
+
+##
+
+Development
+
+  ```bash
 yarn install
 ```
 
