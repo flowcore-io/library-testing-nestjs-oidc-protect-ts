@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0 (2023-01-03)
+
+
+### Features
+
+* initial version with overrides for guards and removing check for wellKnown endpoint ([9e93e12](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/9e93e12d5643e84622d435cabce58b15d0909f5f))
+* initial version with overrides for guards and removing check for wellKnown endpoint ([4b899a0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/4b899a05bdb41827812c4fc470f8532a84b4a3e3))
+* initial version with overrides for guards and removing check for wellKnown endpoint ([efa93f1](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/efa93f1316effdc1e69d9806462eb7851f150ec4))
+
 ## [2.3.0](https://github.com/flowcore-io/library-flowcore-microservice-ts/compare/v2.2.0...v2.3.0) (2022-12-21)
 
 
