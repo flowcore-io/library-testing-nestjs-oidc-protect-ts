@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/compare/v1.0.0...v1.1.0) (2023-01-18)
+
+
+### Features
+
+* added authenticated user decorator support ([e2c1e4e](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/e2c1e4e8670d5afc3a9fd9c60f7bdb6fef253f3f))
+
 ## 1.0.0 (2023-01-03)
 
 
