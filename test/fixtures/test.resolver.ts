@@ -1,6 +1,5 @@
 import {Query, Resolver} from "@nestjs/graphql";
-import {Public, RealmRoles} from "@flowcore/nestjs-oidc-protect";
-import {ResourceRoles} from "@flowcore/nestjs-oidc-protect/dist/library/decorator/resource-roles.decorator";
+import {AuthenticatedUser, Public, RealmRoles, ResourceRoles} from "@flowcore/nestjs-oidc-protect";
 
 @Resolver()
 export class TestResolver {
@@ -27,5 +26,11 @@ export class TestResolver {
   @Query(() => String, {name: "resourceRole"})
   public resourceRole(): string {
     return "resourceRole";
+  }
+
+  @ResourceRoles(["some-client-role"])
+  @Query(() => String, {name: "authenticatedUser"})
+  public authenticatedUser(@AuthenticatedUser() user: any): string {
+    return user.preferred_username;
   }
 }

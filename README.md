@@ -37,9 +37,20 @@ app = await new NestApplicationBuilder()
   .build();
 ```
 
-##
+It is possible to set the authenticated payload that will be returned by the `AuthGuard`:
 
-Development
+```typescript
+import {OidcProtectModulePlugin} from '@flowcore/testing-nestjs-oidc-protect';
+
+app = await new NestApplicationBuilder()
+  .withTestModule((testModule) => testModule.withModule(TestModule))
+  // ... other plugins
+  .with(OidcProtectModulePlugin, pluginBuilder => pluginBuilder.usingAuthenticatedPayload(validTokenPayload))
+  .build();
+
+```
+
+## Development
 
   ```bash
 yarn install

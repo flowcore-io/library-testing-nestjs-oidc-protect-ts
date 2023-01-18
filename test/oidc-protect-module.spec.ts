@@ -52,6 +52,13 @@ async function queryGraphQLEndpoint(
   });
 }
 
+const validTokenPayload = {
+  "sub": "1234567890",
+  "name": "John Doe",
+  "given_name": "John",
+  "family_name": "Doe",
+  "preferred_username": "j.doe",
+};
 
 describe("Oidc Protect Module", () => {
   let app: INestApplication;
@@ -60,7 +67,7 @@ describe("Oidc Protect Module", () => {
     app = await new NestApplicationBuilder()
       .withTestModule((testModule) => testModule.withModule(TestModule))
       .with(LoggerModulePlugin)
-      .with(OidcProtectModulePlugin)
+      .with(OidcProtectModulePlugin, pluginBuilder => pluginBuilder.usingAuthenticatedPayload(validTokenPayload))
       .build();
   });
 
@@ -100,6 +107,15 @@ describe("Oidc Protect Module", () => {
                 }
             `,
           expected: {resourceRole: "resourceRole"},
+        },
+        {
+          name: "resourceRole",
+            query: gql`
+                query {
+                    authenticatedUser
+                }
+            `,
+          expected: {authenticatedUser: validTokenPayload.preferred_username},
         },
     ]).it("should work to call $name endpoint without token", async ({query, expected}) => {
       const response = await queryGraphQLEndpoint(

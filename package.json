@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@flowcore/microservice": "3.0.0",
-    "@flowcore/nestjs-oidc-protect": "2.0.0",
+    "@flowcore/nestjs-oidc-protect": "2.2.0",
     "@flowcore/testing-microservice": "1.1.0",
     "@jbiskur/nestjs-test-utilities": "3.11.0",
     "@nestjs/apollo": "10.1.7",

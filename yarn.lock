@@ -618,10 +618,10 @@
     rxjs "7.8.0"
     winston "3.8.2"
 
-"@flowcore/nestjs-oidc-protect@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@flowcore/nestjs-oidc-protect/-/nestjs-oidc-protect-2.0.0.tgz#a51b3d850ee831bfdfff34b643e9ae5721a24921"
-  integrity sha512-WgAGKxVR6Y2lEpuDTflcTkepZy0Oi+y709PHikShImNwBPWJbxkujgncKDOPxM/E33ftZylWpP4MkVm/xS/geg==
+"@flowcore/nestjs-oidc-protect@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@flowcore/nestjs-oidc-protect/-/nestjs-oidc-protect-2.2.0.tgz#7d62934ce82e900ee955069f0d94f53bc85e5e39"
+  integrity sha512-9lGPJQfLhRRSn284sluyWMkzYr41alvjKY+cgfU06mUt7HRIUVrx+YsQ/13sO1bfZbDIcpDIBK7TC0tql78U0g==
   dependencies:
     "@jbiskur/nestjs-async-module" "3.11.0"
     "@jbiskur/nestjs-options-module-factory" "3.11.0"
