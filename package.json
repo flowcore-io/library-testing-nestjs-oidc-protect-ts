@@ -40,7 +40,7 @@
     "@flowcore/microservice": "3.0.0",
     "@flowcore/nestjs-oidc-protect": "2.2.0",
     "@flowcore/testing-microservice": "1.1.0",
-    "@jbiskur/nestjs-test-utilities": "3.11.0",
+    "@jbiskur/nestjs-test-utilities": "3.13.0",
     "@nestjs/apollo": "10.1.7",
     "@nestjs/cli": "9.1.5",
     "@nestjs/common": "9.2.1",
@@ -83,8 +83,8 @@
     }
   },
   "dependencies": {
-    "@jbiskur/nestjs-async-module": "3.11.0",
-    "@jbiskur/nestjs-options-module-factory": "3.11.0",
+    "@jbiskur/nestjs-async-module": "3.13.0",
+    "@jbiskur/nestjs-options-module-factory": "3.13.0",
     "@types/dotenv": "8.2.0",
     "@types/lodash": "4.14.191",
     "dotenv": "16.0.3",
