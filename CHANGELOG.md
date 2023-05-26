@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/compare/v1.2.0...v2.0.0) (2023-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated core dependencies, this requires an update for services using this package
+
+### Features
+
+* updated nestjs-oidc-project package and nestjs core ([03ee2c7](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/03ee2c7b89c6cd3c036df523effd206cde27e199))
+
+
+### Bug Fixes
+
+* moved the payload check further up the run method execution stack ([3b04767](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/3b0476767d1709e09a00971ad1696f8e9809b12a))
+* when forced unauthenticated is true, authenticatedUser is set to undefined ([9aa594d](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/9aa594d388e3ac08a41205c23b98dea6ec2167ff))
+
 ## [1.2.0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/compare/v1.1.0...v1.2.0) (2023-05-26)
 
 
