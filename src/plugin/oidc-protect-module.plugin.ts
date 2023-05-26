@@ -37,7 +37,9 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
   }
 
   run(appBuilder: NestApplicationBuilder): void {
-    const payload = this.authenticatedPayload;
+    const payload = this.forceUnauthenticated
+      ? undefined
+      : this.authenticatedPayload;
     const forceUnauthenticated = this.forceUnauthenticated;
 
     @Injectable()
@@ -60,10 +62,7 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
 
         guards.forEach((guard) => {
           guard.instance.canActivate = async (context: ExecutionContext) => {
-            if (
-              guard.instance.constructor.name === "AuthGuard" &&
-              !forceUnauthenticated
-            ) {
+            if (guard.instance.constructor.name === "AuthGuard") {
               const request = await this.getRequest(context);
               request.authenticatedUser = payload;
             }
