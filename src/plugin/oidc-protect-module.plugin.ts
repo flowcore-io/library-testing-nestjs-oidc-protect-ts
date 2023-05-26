@@ -60,7 +60,10 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
 
         guards.forEach((guard) => {
           guard.instance.canActivate = async (context: ExecutionContext) => {
-            if (guard.instance.constructor.name === "AuthGuard" && payload) {
+            if (
+              guard.instance.constructor.name === "AuthGuard" &&
+              !forceUnauthenticated
+            ) {
               const request = await this.getRequest(context);
               request.authenticatedUser = payload;
             }
