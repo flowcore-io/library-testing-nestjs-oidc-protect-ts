@@ -1,31 +1,51 @@
-import {INestApplicationBuilderPlugin, NestApplicationBuilder,} from "@jbiskur/nestjs-test-utilities";
-import {ContextType, ExecutionContext, Injectable, Module, OnModuleInit} from "@nestjs/common";
-import {DiscoveryService, ModulesContainer} from "@nestjs/core";
-import {OidcProtectService} from "@flowcore/nestjs-oidc-protect/dist/library/oidc-protect/oidc-protect.service";
+import {
+  INestApplicationBuilderPlugin,
+  NestApplicationBuilder,
+} from "@jbiskur/nestjs-test-utilities";
+import {
+  ContextType,
+  ExecutionContext,
+  Injectable,
+  Module,
+  OnModuleInit,
+} from "@nestjs/common";
+import { DiscoveryService, ModulesContainer, Reflector } from "@nestjs/core";
+import { OidcProtectService } from "@flowcore/nestjs-oidc-protect/dist/library/oidc-protect/oidc-protect.service";
+import { PUBLIC_OPERATION_KEY } from "@flowcore/nestjs-oidc-protect";
 
 let gqlExecutionContext: any = null;
 
 export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
   private authenticatedPayload: any = {
-    "sub": "deaab2a8-8377-4e05-9ffc-a175b494406d",
-    "name": "Rice Wuckert",
-    "given_name": "Rice",
-    "family_name": "Wuckert",
-    "preferred_username": "Gabriel92",
+    sub: "deaab2a8-8377-4e05-9ffc-a175b494406d",
+    name: "Rice Wuckert",
+    given_name: "Rice",
+    family_name: "Wuckert",
+    preferred_username: "Gabriel92",
   };
+
+  private forceUnauthenticated = false;
 
   usingAuthenticatedPayload(payload: any): this {
     this.authenticatedPayload = payload;
     return this;
   }
 
+  forceUnauthenticatedUser(): this {
+    this.forceUnauthenticated = true;
+    return this;
+  }
+
   run(appBuilder: NestApplicationBuilder): void {
     const payload = this.authenticatedPayload;
+    const forceUnauthenticated = this.forceUnauthenticated;
 
     @Injectable()
     class GuardOverrideService implements OnModuleInit {
-      constructor(private readonly container: ModulesContainer) {
-      }
+      constructor(
+        private readonly container: ModulesContainer,
+        private readonly reflector: Reflector,
+      ) {}
 
       onModuleInit(): any {
         const discoveryService = new DiscoveryService(this.container);
@@ -40,12 +60,21 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
 
         guards.forEach((guard) => {
           guard.instance.canActivate = async (context: ExecutionContext) => {
-            if (guard.instance.constructor.name === "AuthGuard") {
+            if (guard.instance.constructor.name === "AuthGuard" && payload) {
               const request = await this.getRequest(context);
               request.authenticatedUser = payload;
             }
 
-            return true;
+            const isPublic = this.reflector.getAllAndOverride<boolean>(
+              PUBLIC_OPERATION_KEY,
+              [context.getHandler(), context.getClass()],
+            );
+
+            if (isPublic) {
+              return true;
+            }
+
+            return forceUnauthenticated ? false : true;
           };
         });
       }
@@ -72,8 +101,7 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
       imports: [],
       providers: [GuardOverrideService],
     })
-    class GuardOverrideModule {
-    }
+    class GuardOverrideModule {}
 
     @Injectable()
     class OidcProtectModuleSpec extends OidcProtectService {
@@ -83,11 +111,11 @@ export class OidcProtectModulePlugin implements INestApplicationBuilderPlugin {
     }
 
     appBuilder.withTestModule((builder) =>
-      builder.withModule(
-        GuardOverrideModule,
-      ),
+      builder.withModule(GuardOverrideModule),
     );
 
-    appBuilder.withOverrideProvider(OidcProtectService, (overrideWith) => overrideWith.useClass(OidcProtectModuleSpec))
+    appBuilder.withOverrideProvider(OidcProtectService, (overrideWith) =>
+      overrideWith.useClass(OidcProtectModuleSpec),
+    );
   }
 }
