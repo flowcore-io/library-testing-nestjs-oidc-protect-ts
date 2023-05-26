@@ -2,7 +2,7 @@
   "name": "@flowcore/testing-nestjs-oidc-protect",
   "description": "A NestJS OidcProtect plugin for the @jbiskur/nestjs-test-utilities testing library. To facilitate mocking successfull calls to protected routes during testing.",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "commonjs",
   "publishConfig": {
     "access": "public",

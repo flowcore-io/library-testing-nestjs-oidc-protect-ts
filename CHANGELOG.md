@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/compare/v1.1.0...v1.2.0) (2023-05-26)
+
+
+### Features
+
+* added ability to force unauthenticated user when testing ([d10bec8](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/commit/d10bec8c91fccbc1e1319922cb14e068037f0ce1))
+
 ## [1.1.0](https://github.com/flowcore-io/library-testing-nestjs-oidc-protect-ts/compare/v1.0.0...v1.1.0) (2023-01-18)
 
 
