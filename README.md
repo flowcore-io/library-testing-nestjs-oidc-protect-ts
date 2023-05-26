@@ -50,6 +50,19 @@ app = await new NestApplicationBuilder()
 
 ```
 
+It is also possible to set the module to always act as if the user is unauthenticated:
+
+```typescript
+import {OidcProtectModulePlugin} from '@flowcore/testing-nestjs-oidc-protect';
+
+app = await new NestApplicationBuilder()
+  .withTestModule((testModule) => testModule.withModule(TestModule))
+  // ... other plugins
+  .with(OidcProtectModulePlugin, pluginBuilder => pluginBuilder.forceUnauthenticatedUser())
+  .build();
+
+```
+
 ## Development
 
   ```bash
